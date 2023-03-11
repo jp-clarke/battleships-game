@@ -20,6 +20,26 @@ class Board:
         self.guesses = []
         self.ship_positions = []
 
+def game_setup():
+    """
+    Player enters name, sets board size. Ship number based on board size.
+    """
+    player_name = input("Enter your name:\n")
+    board_size = input("Enter board size (4-6)\n")    
+
+    while True:
+        if validate_size(board_size): #function to be added
+            print(f"Board size: {board_size}x{board_size}")
+            break
+
+    ship_number = round(1.3*int(board_size))
+    print(f"You have {ship_number} ships.")
+
+    return player_name
+    return board_size
+    return ship_number
+    
+
 
 
 def play_game():
@@ -29,6 +49,7 @@ def play_game():
     """
     score["player"] = 0
     score["computer"] = 0
+    game_setup()
 
 print("Welcome to Battleships!")
 play_game()
