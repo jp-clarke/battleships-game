@@ -2,7 +2,10 @@ from beautifultable import BeautifulTable
 """
 https://beautifultable.readthedocs.io/en/v0.7.0/
 """
+
 from random import randint
+
+score = {"player": 0, "computer": 0}
 
 class Board:
     """
@@ -18,4 +21,14 @@ class Board:
         self.ship_positions = []
 
 
+
+def play_game():
+    """
+    Starts a new game. Resets scores, runs game setup, initialises
+    player and computer boards and runs game to completion.
+    """
+    score["player"] = 0
+    score["computer"] = 0
+
 print("Welcome to Battleships!")
+play_game()
