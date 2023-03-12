@@ -32,11 +32,11 @@ def game_setup():
         board_size = input("Enter board size (4-6)\n") 
 
         if validate_size(board_size):
-            print(f"Board size: {board_size}x{board_size}")
+            print(f"Board size: {board_size}x{board_size}\n")
             break
 
     ship_number = round(1.3*int(board_size))
-    print(f"You have {ship_number} ships.")
+    print(f"You have {ship_number} ships.\n")
 
     return player_name, board_size, ship_number
 
@@ -70,6 +70,40 @@ def populate_board(board):
             i += 1
 
 
+def game_board(board):
+    """
+    Displays game board to player.
+    https://stackoverflow.com/questions/18544419/how-to-convert-numbers-to-alphabet
+    """
+
+    grid = BeautifulTable()
+    columns_header = []
+    rows_header = []
+
+    for squares in range(int(board.board_size)):
+        columns_header.append(chr(squares + 65))
+        rows_header.append(str(squares + 1))    
+     
+    grid.columns.header = columns_header
+    grid.rows.header = rows_header
+    
+    if board.type == "human":
+        ships = len(board.ship_positions)
+        for i in range(ships):
+            position = board.ship_positions[i]
+            x = position[0]
+            y = position[1]
+            grid.rows[x][y] = "\u0394"
+
+        print(f"{board.player_name}'s Board:")
+        print(grid)
+    
+    if board.type == "computer":
+        print(f"\n{board.player_name}'s Board:")
+        print(grid)
+
+
+
 def play_game():
     """
     Starts a new game. Resets scores, runs game setup, initialises
@@ -89,8 +123,8 @@ def play_game():
     populate_board(player_board)
     populate_board(computer_board)
 
-    print(player_board.ship_positions)
-    print(computer_board.ship_positions)
+    game_board(player_board)
+    game_board(computer_board)
 
 
 print("Welcome to Battleships!")
