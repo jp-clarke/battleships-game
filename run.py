@@ -31,7 +31,7 @@ def game_setup():
     while True:        
         board_size = input("Enter board size (4-6)\n") 
 
-        if validate_size(board_size): #function to be added
+        if validate_size(board_size):
             print(f"Board size: {board_size}x{board_size}")
             break
 
@@ -55,6 +55,19 @@ def validate_size(value):
             print("Please enter a number between 4 and 6")
 
 
+def populate_board(board):
+    """
+    Positions ships on board for player and computer.
+    """
+
+    i = 1
+    while i <= board.ship_number:
+        x = randint(0, int(board.board_size)-1)
+        y = randint(0, int(board.board_size)-1)        
+    
+        if [x, y] not in board.ship_positions:
+            board.ship_positions.append([x, y])
+            i += 1
 
 
 def play_game():
@@ -64,7 +77,20 @@ def play_game():
     """
     score["player"] = 0
     score["computer"] = 0
-    game_setup()
+    
+    setup_data = game_setup()
+    player_name = setup_data[0]
+    board_size = setup_data[1]
+    ship_number = setup_data[2]
+
+    player_board = Board(board_size, ship_number, player_name, "human")
+    computer_board = Board(board_size, ship_number, "Computer", "computer")
+
+    populate_board(player_board)
+    populate_board(computer_board)
+
+    print(player_board.ship_positions)
+    print(computer_board.ship_positions)
 
 
 print("Welcome to Battleships!")
