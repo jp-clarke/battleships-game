@@ -1,9 +1,9 @@
+from random import randint
+
 from beautifultable import BeautifulTable
 """
 https://beautifultable.readthedocs.io/en/v0.7.0/
 """
-
-from random import randint
 
 score = {"player": 0, "computer": 0}
 
@@ -32,7 +32,7 @@ def game_setup():
         board_size = input("Enter board size (4-6)\n") 
 
         if validate_size(board_size):
-            print(f"Board size: {board_size}x{board_size}\n")
+            print(f"\nBoard size: {board_size}x{board_size}\n")
             break
 
     ship_number = round(1.3*int(board_size))
@@ -52,7 +52,7 @@ def validate_size(value):
             print("Please enter a number between 4 and 6")
             return False
     except ValueError:
-            print("Please enter a number between 4 and 6")
+        print("Please enter a number between 4 and 6")
 
 
 def populate_board(board):
@@ -63,8 +63,8 @@ def populate_board(board):
     i = 1
     while i <= board.ship_number:
         x = randint(0, int(board.board_size)-1)
-        y = randint(0, int(board.board_size)-1)        
-    
+        y = randint(0, int(board.board_size)-1)
+
         if [x, y] not in board.ship_positions:
             board.ship_positions.append([x, y])
             i += 1
@@ -83,10 +83,10 @@ def game_board(board):
     for squares in range(int(board.board_size)):
         columns_header.append(chr(squares + 65))
         rows_header.append(str(squares + 1))    
-     
+
     grid.columns.header = columns_header
     grid.rows.header = rows_header
-    
+
     if board.type == "human":
         ships = len(board.ship_positions)
         for i in range(ships):
@@ -97,11 +97,37 @@ def game_board(board):
 
         print(f"{board.player_name}'s Board:")
         print(grid)
-    
+
     if board.type == "computer":
         print(f"\n{board.player_name}'s Board:")
         print(grid)
 
+
+def player_guess(player_board, computer_board):
+    """
+    Receives a target from player and returns a hit or miss on computer board.
+    """
+    print(f"\nYou have {player_board.ship_number} ships left")
+    print(f"Computer has {computer_board.ship_number} ships left\n")
+
+    while True:
+        target = input("Choose a target. eg. 'A1'\n")
+        target = list(target)
+        # validate_target()
+        target[0] = ord(target[0]) - 65
+        target[1] = int(target[1]) - 1
+
+        if target not in computer_board.guesses:
+            break
+        else:
+            return True
+    
+    computer_board.guesses.append(target)
+    print(computer_board.guesses)    
+    # if target in computer_board.ship_positions:
+
+
+    
 
 
 def play_game():
@@ -111,7 +137,7 @@ def play_game():
     """
     score["player"] = 0
     score["computer"] = 0
-    
+
     setup_data = game_setup()
     player_name = setup_data[0]
     board_size = setup_data[1]
@@ -126,6 +152,8 @@ def play_game():
     game_board(player_board)
     game_board(computer_board)
 
+    player_guess(player_board, computer_board)
 
-print("Welcome to Battleships!")
+
+print("\nWelcome to Battleships!\n")
 play_game()
