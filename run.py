@@ -120,17 +120,15 @@ def player_guess(player_board, computer_board):
         target = input("Choose a target. eg. 'A1'\n")
         target = list(target)
         target[0] = target[0].upper()
-        validate_target(target)
-
-        # https://stackoverflow.com/questions/4528982/convert-alphabet-letters-to-number-in-python
-        target[0] = ord(target[0]) - 65
-        target[1] = int(target[1]) - 1
-
-        if target not in computer_board.guesses:
+        
+        if validate_target(target):
+            # https://stackoverflow.com/questions/4528982/convert-alphabet-letters-to-number-in-python
             break
-        else:
-            return True
+            # if target not in computer_board.guesses:
+            #    break
     
+    target[0] = ord(target[0]) - 65
+    target[1] = int(target[1]) - 1   
     computer_board.guesses.append(target)
     print(computer_board.guesses)
     print(player_board.ship_positions)
@@ -141,8 +139,15 @@ def player_guess(player_board, computer_board):
 def validate_target(value):
     """
     Validates player's input coordinates to target computer board.
-    """
-    
+    """    
+    try:
+        if value[0] in rows_header and value[1] in columns_header:
+            return True
+        else:
+            print("Please enter a valid coordinate")
+            return False
+    except ValueError:
+        print("Please enter a valid coordinate")
 
 
 
