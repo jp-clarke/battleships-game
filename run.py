@@ -7,6 +7,8 @@ https://beautifultable.readthedocs.io/en/v0.7.0/
 
 score = {"player": 0, "computer": 0}
 
+columns_header = []
+rows_header = []
 
 class Board:
     """
@@ -62,11 +64,11 @@ def populate_board(board):
 
     i = 1
     while i <= board.ship_number:
-        x = randint(0, int(board.board_size)-1)
-        y = randint(0, int(board.board_size)-1)
+        row = randint(0, int(board.board_size)-1)
+        column = randint(0, int(board.board_size)-1)
 
-        if [x, y] not in board.ship_positions:
-            board.ship_positions.append([x, y])
+        if [row, column] not in board.ship_positions:
+            board.ship_positions.append([row, column])
             i += 1
 
 
@@ -77,12 +79,16 @@ def game_board(board):
     """
 
     grid = BeautifulTable()
+    
+    # Reset row and column header lists
+    global columns_header
     columns_header = []
+    global rows_header
     rows_header = []
 
     for squares in range(int(board.board_size)):
-        columns_header.append(chr(squares + 65))
-        rows_header.append(str(squares + 1))    
+        rows_header.append(chr(squares + 65))
+        columns_header.append(str(squares + 1))    
 
     grid.columns.header = columns_header
     grid.rows.header = rows_header
@@ -91,9 +97,9 @@ def game_board(board):
         ships = len(board.ship_positions)
         for i in range(ships):
             position = board.ship_positions[i]
-            x = position[0]
-            y = position[1]
-            grid.rows[x][y] = "\u0394"
+            row = position[0]
+            column = position[1]
+            grid.rows[row][column] = "\u0394"
 
         print(f"{board.player_name}'s Board:")
         print(grid)
@@ -113,7 +119,10 @@ def player_guess(player_board, computer_board):
     while True:
         target = input("Choose a target. eg. 'A1'\n")
         target = list(target)
-        # validate_target()
+        target[0] = target[0].upper()
+        validate_target(target)
+
+        # https://stackoverflow.com/questions/4528982/convert-alphabet-letters-to-number-in-python
         target[0] = ord(target[0]) - 65
         target[1] = int(target[1]) - 1
 
@@ -123,11 +132,18 @@ def player_guess(player_board, computer_board):
             return True
     
     computer_board.guesses.append(target)
-    print(computer_board.guesses)    
+    print(computer_board.guesses)
+    print(player_board.ship_positions)
+    print(computer_board.ship_positions)
     # if target in computer_board.ship_positions:
 
 
+def validate_target(value):
+    """
+    Validates player's input coordinates to target computer board.
+    """
     
+
 
 
 def play_game():
