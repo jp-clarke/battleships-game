@@ -80,8 +80,8 @@ def game_board(board):
 
     grid = BeautifulTable()
 
-    board.columns_header = []
-    board.rows_header = []
+    # board.columns_header = []
+    # board.rows_header = []
 
     for squares in range(int(board.board_size)):
         board.rows_header.append(chr(squares + 65))
@@ -114,6 +114,7 @@ def player_guess(player_board, computer_board):
     print(f"Computer has {computer_board.ship_number} ships left\n")
 
     computer_board.guesses = [[0,0]]
+    print(computer_board.ship_positions)
 
     while True:
         target = input("Choose a target. eg. 'A1'\n")
@@ -129,12 +130,17 @@ def player_guess(player_board, computer_board):
                 print("Coordinate has already been selected. Please try again")
 
             else:
-                computer_board.guesses.append(target)                
+                computer_board.guesses.append(target)
                 break
 
+    if target in computer_board.ship_positions:
+        computer_board.ship_number -= 1
+        print(f"Hit! Computer has {computer_board.ship_number} ships left")
+    else:
+        print(f"Miss! Computer has {computer_board.ship_number} ships left")
+
     print(computer_board.guesses)
-    print(player_board.ship_positions)
-    print(computer_board.ship_positions)
+    print(player_board.ship_positions)    
     # if target in computer_board.ship_positions:
 
 
