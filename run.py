@@ -7,8 +7,6 @@ https://beautifultable.readthedocs.io/en/v0.7.0/
 
 score = {"player": 0, "computer": 0}
 
-columns_header = []
-rows_header = []
 
 class Board:
     """
@@ -22,6 +20,8 @@ class Board:
         self.type = type
         self.guesses = []
         self.ship_positions = []
+        self.columns_header = []
+        self.rows_header = []
 
 
 def game_setup():
@@ -80,18 +80,15 @@ def game_board(board):
 
     grid = BeautifulTable()
     
-    # Reset row and column header lists
-    global columns_header
-    columns_header = []
-    global rows_header
-    rows_header = []
+    board.columns_header = []
+    board.rows_header = []
 
     for squares in range(int(board.board_size)):
-        rows_header.append(chr(squares + 65))
-        columns_header.append(str(squares + 1))    
+        board.rows_header.append(chr(squares + 65))
+        board.columns_header.append(str(squares + 1))    
 
-    grid.columns.header = columns_header
-    grid.rows.header = rows_header
+    grid.columns.header = board.columns_header
+    grid.rows.header = board.rows_header
 
     if board.type == "human":
         ships = len(board.ship_positions)
@@ -121,14 +118,14 @@ def player_guess(player_board, computer_board):
         target = list(target)
         target[0] = target[0].upper()
         
-        if validate_target(target):
+        if validate_target(computer_board, target):
             # https://stackoverflow.com/questions/4528982/convert-alphabet-letters-to-number-in-python
             break
             # if target not in computer_board.guesses:
             #    break
     
     target[0] = ord(target[0]) - 65
-    target[1] = int(target[1]) - 1   
+    target[1] = int(target[1]) - 1
     computer_board.guesses.append(target)
     print(computer_board.guesses)
     print(player_board.ship_positions)
@@ -136,12 +133,12 @@ def player_guess(player_board, computer_board):
     # if target in computer_board.ship_positions:
 
 
-def validate_target(value):
+def validate_target(board, value):
     """
     Validates player's input coordinates to target computer board.
     """    
     try:
-        if value[0] in rows_header and value[1] in columns_header:
+        if value[0] in board.rows_header and value[1] in board.columns_header:
             return True
         else:
             print("Please enter a valid coordinate")
