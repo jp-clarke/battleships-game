@@ -30,7 +30,7 @@ def game_setup():
     """
     player_name = input("Enter your name:\n")
 
-    while True:        
+    while True:
         board_size = input("Enter board size (4-6)\n") 
 
         if validate_size(board_size):
@@ -79,7 +79,7 @@ def game_board(board):
     """
 
     grid = BeautifulTable()
-    
+
     board.columns_header = []
     board.rows_header = []
 
@@ -113,20 +113,25 @@ def player_guess(player_board, computer_board):
     print(f"\nYou have {player_board.ship_number} ships left")
     print(f"Computer has {computer_board.ship_number} ships left\n")
 
+    computer_board.guesses = [[0,0]]
+
     while True:
         target = input("Choose a target. eg. 'A1'\n")
         target = list(target)
         target[0] = target[0].upper()
-        
+
         if validate_target(computer_board, target):
             # https://stackoverflow.com/questions/4528982/convert-alphabet-letters-to-number-in-python
-            break
-            # if target not in computer_board.guesses:
-            #    break
-    
-    target[0] = ord(target[0]) - 65
-    target[1] = int(target[1]) - 1
-    computer_board.guesses.append(target)
+            target[0] = ord(target[0]) - 65
+            target[1] = int(target[1]) - 1
+
+            if target in computer_board.guesses:
+                print("Coordinate has already been selected. Please try again")
+
+            else:
+                computer_board.guesses.append(target)                
+                break
+
     print(computer_board.guesses)
     print(player_board.ship_positions)
     print(computer_board.ship_positions)
@@ -136,9 +141,9 @@ def player_guess(player_board, computer_board):
 def validate_target(board, value):
     """
     Validates player's input coordinates to target computer board.
-    """    
+    """
     try:
-        if value[0] in board.rows_header and value[1] in board.columns_header:
+        if len(value) == 2 and value[0] in board.rows_header and value[1] in board.columns_header:
             return True
         else:
             print("Please enter a valid coordinate")
