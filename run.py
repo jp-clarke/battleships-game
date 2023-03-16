@@ -103,7 +103,7 @@ def game_loop(player_board, computer_board):
     Loops through player and computer guesses until all ships destroyed on either board.
     """
     print(f"\nYou have {player_board.ship_number} ships left")
-    print(f"Computer has {computer_board.ship_number} ships left\n")
+    print(f"Computer has {computer_board.ship_number} ships left")
 
     while player_board.ship_number != 0 and computer_board.ship_number != 0:
         player_guess(computer_board)
@@ -112,7 +112,7 @@ def game_loop(player_board, computer_board):
         update_board(player_board)
         update_board(computer_board)
 
-    print("game over")
+    # print("game over")
 
 
 def player_guess(board):
@@ -122,7 +122,7 @@ def player_guess(board):
     print(board.ship_positions)
 
     while True:
-        target = input("Choose a target. eg. 'A1'\n")
+        target = input("\nChoose a target. eg. 'A1'\n")
         target = list(target)
         target[0] = target[0].upper()
 
@@ -168,7 +168,7 @@ def computer_guess(board):
         target = [row, column]
         coordinates = str(chr(target[0] + 65) + str(target[1] + 1))
 
-        print(target)
+        # print(target)
 
         if target not in board.guesses:
             board.guesses.append(target)
@@ -176,8 +176,8 @@ def computer_guess(board):
         else:
             continue
 
-    print(board.guesses)
-    
+    # print(board.guesses)
+
     print(f"Computer chose {coordinates}")
     if target in board.ship_positions:
         board.ship_number -= 1
@@ -206,6 +206,35 @@ def update_board(board):
     print(grid)
 
 
+def end_game(player_board, computer_board):
+    """
+    Finishes game and declares winner.
+    """
+    if player_board.ship_number == 0 and computer_board.ship_number == 0:
+        print(f"{player_board.player_name} has no ships left")
+        print("Computer has no ships left")
+        print("Game drawn")
+    elif player_board.ship_number == 1 and computer_board.ship_number == 0:
+        print(f"{player_board.player_name} has 1 ship left")
+        print("Computer has no ships left")
+        print(f"{player_board.player_name} wins the game")
+    elif player_board.ship_number > 1 and computer_board.ship_number == 0:
+        print(f"{player_board.player_name} has {player_board.ship_number} ships left")
+        print("Computer has no ships left")
+        print(f"{player_board.player_name} wins the game")
+    elif player_board.ship_number == 0 and computer_board.ship_number == 1:
+        print(f"{player_board.player_name} has no ships left")
+        print("Computer has 1 ship left")
+        print()
+    elif player_board.ship_number == 0 and computer_board.ship_number > 1:
+        print(f"{player_board.player_name} has no ships left")
+        print(f"Computer has {computer_board.ship_number} ships left")
+        print("Computer wins the game")
+
+    input("Press Enter to continue...")
+    play_game()
+
+
 def play_game():
     """
     Starts a new game. Resets scores, runs game setup, initialises
@@ -213,6 +242,8 @@ def play_game():
     """
     score["player"] = 0
     score["computer"] = 0
+
+    print("\nWelcome to Battleships!\n")
 
     setup_data = game_setup()
     player_name = setup_data[0]
@@ -230,6 +261,7 @@ def play_game():
 
     game_loop(player_board, computer_board)
 
+    end_game(player_board, computer_board)
 
-print("\nWelcome to Battleships!\n")
+
 play_game()
