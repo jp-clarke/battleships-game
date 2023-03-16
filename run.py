@@ -98,59 +98,50 @@ def game_board(board):
     print(grid)
 
 
-def update_board(board):
+def game_loop(player_board, computer_board):
     """
-    Updates player and computer boards between rounds by adding hits and misses.
-    """
-    grid = board.grid
-    guesses = len(board.guesses)
-    for i in range(guesses):
-        position = board.guesses[i]
-        row = position[0]
-        column = position[1]
-
-        if position in board.ship_positions:
-            grid.rows[row][column] = "X"
-        else:
-            grid.rows[row][column] = "O"
-
-    print(f"\n{board.player_name}'s Board:")
-    print(grid)
-
-
-def player_guess(player_board, computer_board):
-    """
-    Receives a target from player and returns a hit or miss on computer board.
+    Loops through player and computer guesses until all ships destroyed on either board.
     """
     print(f"\nYou have {player_board.ship_number} ships left")
     print(f"Computer has {computer_board.ship_number} ships left\n")
 
-    print(computer_board.ship_positions)
+    while player_board.ship_number != 0 and computer_board.ship_number != 0:
+        player_guess(computer_board)
+        computer_guess(player_board)
+
+        update_board(player_board)
+        update_board(computer_board)
+
+    print("game over")
+
+
+def player_guess(board):
+    """
+    Receives a target from player and returns a hit or miss on computer board.
+    """
+    print(board.ship_positions)
 
     while True:
         target = input("Choose a target. eg. 'A1'\n")
         target = list(target)
         target[0] = target[0].upper()
 
-        if validate_target(computer_board, target):
+        if validate_target(board, target):
             # https://stackoverflow.com/questions/4528982/convert-alphabet-letters-to-number-in-python
             target[0] = ord(target[0]) - 65
             target[1] = int(target[1]) - 1
 
-            if target in computer_board.guesses:
+            if target in board.guesses:
                 print("Coordinate has already been selected. Please try again")
             else:
-                computer_board.guesses.append(target)
+                board.guesses.append(target)
                 break
 
-    if target in computer_board.ship_positions:
-        computer_board.ship_number -= 1
-        print(f"Hit! Computer has {computer_board.ship_number} ships left")
+    if target in board.ship_positions:
+        board.ship_number -= 1
+        print(f"Hit! Computer ships remaining: {board.ship_number}")
     else:
-        print(f"Miss! Computer has {computer_board.ship_number} ships left")
-
-    print(computer_board.guesses)
-    print(player_board.ship_positions)
+        print(f"Miss! Computer ships remaining: {board.ship_number}")
 
 
 def validate_target(board, value):
@@ -191,6 +182,26 @@ def computer_guess(player_board):
         print(f"Computer misses. You have {player_board.ship_number} ships left")
 
 
+def update_board(board):
+    """
+    Updates player and computer boards between rounds by adding hits and misses.
+    """
+    grid = board.grid
+    guesses = len(board.guesses)
+    for i in range(guesses):
+        position = board.guesses[i]
+        row = position[0]
+        column = position[1]
+
+        if position in board.ship_positions:
+            grid.rows[row][column] = "X"
+        else:
+            grid.rows[row][column] = "O"
+
+    print(f"\n{board.player_name}'s Board:")
+    print(grid)
+
+
 def play_game():
     """
     Starts a new game. Resets scores, runs game setup, initialises
@@ -213,11 +224,7 @@ def play_game():
     game_board(player_board)
     game_board(computer_board)
 
-    player_guess(player_board, computer_board)
-    computer_guess(player_board)
-
-    update_board(player_board)
-    update_board(computer_board)
+    game_loop(player_board, computer_board)
 
 
 print("\nWelcome to Battleships!\n")
