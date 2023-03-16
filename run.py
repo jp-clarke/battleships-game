@@ -22,6 +22,7 @@ class Board:
         self.ship_positions = []
         self.columns_header = []
         self.rows_header = []
+        self.grid = BeautifulTable()
 
 
 def game_setup():
@@ -76,7 +77,7 @@ def game_board(board):
     Displays game board to player.
     https://stackoverflow.com/questions/18544419/how-to-convert-numbers-to-alphabet
     """
-    grid = BeautifulTable()
+    grid = board.grid
 
     for squares in range(int(board.board_size)):
         board.rows_header.append(chr(squares + 65))
@@ -93,12 +94,28 @@ def game_board(board):
             column = position[1]
             grid.rows[row][column] = "\u0394"
 
-        print(f"{board.player_name}'s Board:")
-        print(grid)
+    print(f"\n{board.player_name}'s Board:")
+    print(grid)
 
-    if board.type == "computer":
-        print(f"\n{board.player_name}'s Board:")
-        print(grid)
+
+def update_board(board):
+    """
+    Updates player and computer boards between rounds by adding hits and misses.
+    """
+    grid = board.grid
+    guesses = len(board.guesses)
+    for i in range(guesses):
+        position = board.guesses[i]
+        row = position[0]
+        column = position[1]
+
+        if position in board.ship_positions:
+            grid.rows[row][column] = "X"
+        else:
+            grid.rows[row][column] = "O"
+
+    print(f"\n{board.player_name}'s Board:")
+    print(grid)
 
 
 def player_guess(player_board, computer_board):
@@ -198,6 +215,9 @@ def play_game():
 
     player_guess(player_board, computer_board)
     computer_guess(player_board)
+
+    update_board(player_board)
+    update_board(computer_board)
 
 
 print("\nWelcome to Battleships!\n")
