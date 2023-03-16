@@ -5,8 +5,6 @@ from beautifultable import BeautifulTable
 https://beautifultable.readthedocs.io/en/v0.7.0/
 """
 
-score = {"player": 0, "computer": 0}
-
 
 class Board:
     """
@@ -240,9 +238,6 @@ def play_game():
     Starts a new game. Resets scores, runs game setup, initialises
     player and computer boards and runs game to completion.
     """
-    score["player"] = 0
-    score["computer"] = 0
-
     print("\nWelcome to Battleships!\n")
 
     setup_data = game_setup()
