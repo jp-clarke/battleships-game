@@ -158,28 +158,32 @@ def validate_target(board, value):
         print("Please enter a valid coordinate")
 
 
-def computer_guess(player_board):
+def computer_guess(board):
     """
     Generates a target from computer and returns a hit or miss on player board.
     """
-    row = randint(0, int(player_board.board_size)-1)
-    column = randint(0, int(player_board.board_size)-1)
-    target = [row, column]
-    coordinates = str(chr(target[0] + 65) + str(target[1] + 1))
-
     while True:
-        if target in player_board.guesses:
-            return True
-        else:
-            player_board.guesses.append(target)
-            break
+        row = randint(0, int(board.board_size)-1)
+        column = randint(0, int(board.board_size)-1)
+        target = [row, column]
+        coordinates = str(chr(target[0] + 65) + str(target[1] + 1))
 
+        print(target)
+
+        if target not in board.guesses:
+            board.guesses.append(target)
+            break
+        else:
+            continue
+
+    print(board.guesses)
+    
     print(f"Computer chose {coordinates}")
-    if target in player_board.ship_positions:
-        player_board.ship_number -=1
-        print(f"Computer scores a hit! You have {player_board.ship_number} ships left")
+    if target in board.ship_positions:
+        board.ship_number -= 1
+        print(f"Computer scores a hit! Player ships remaining: {board.ship_number}")
     else:
-        print(f"Computer misses. You have {player_board.ship_number} ships left")
+        print(f"Computer misses. Player ships remaining: {board.ship_number}")
 
 
 def update_board(board):
