@@ -34,7 +34,7 @@ def game_setup():
         board_size = input("Enter board size (4-6)\n") 
 
         if validate_size(board_size):
-            print(f"\nBoard size: {board_size}x{board_size}\n")
+            print(f"\nBoard size: {board_size}x{board_size}")
             break
 
     ship_number = round(1.3*int(board_size))
@@ -61,7 +61,6 @@ def populate_board(board):
     """
     Positions ships on board for player and computer.
     """
-
     i = 1
     while i <= board.ship_number:
         row = randint(0, int(board.board_size)-1)
@@ -77,15 +76,11 @@ def game_board(board):
     Displays game board to player.
     https://stackoverflow.com/questions/18544419/how-to-convert-numbers-to-alphabet
     """
-
     grid = BeautifulTable()
-
-    # board.columns_header = []
-    # board.rows_header = []
 
     for squares in range(int(board.board_size)):
         board.rows_header.append(chr(squares + 65))
-        board.columns_header.append(str(squares + 1))    
+        board.columns_header.append(str(squares + 1))
 
     grid.columns.header = board.columns_header
     grid.rows.header = board.rows_header
@@ -113,7 +108,6 @@ def player_guess(player_board, computer_board):
     print(f"\nYou have {player_board.ship_number} ships left")
     print(f"Computer has {computer_board.ship_number} ships left\n")
 
-    computer_board.guesses = [[0,0]]
     print(computer_board.ship_positions)
 
     while True:
@@ -128,7 +122,6 @@ def player_guess(player_board, computer_board):
 
             if target in computer_board.guesses:
                 print("Coordinate has already been selected. Please try again")
-
             else:
                 computer_board.guesses.append(target)
                 break
@@ -140,8 +133,7 @@ def player_guess(player_board, computer_board):
         print(f"Miss! Computer has {computer_board.ship_number} ships left")
 
     print(computer_board.guesses)
-    print(player_board.ship_positions)    
-    # if target in computer_board.ship_positions:
+    print(player_board.ship_positions)
 
 
 def validate_target(board, value):
@@ -157,6 +149,29 @@ def validate_target(board, value):
     except ValueError:
         print("Please enter a valid coordinate")
 
+
+def computer_guess(player_board):
+    """
+    Generates a target from computer and returns a hit or miss on player board.
+    """
+    row = randint(0, int(player_board.board_size)-1)
+    column = randint(0, int(player_board.board_size)-1)
+    target = [row, column]
+    coordinates = str(chr(target[0] + 65) + str(target[1] + 1))
+
+    while True:
+        if target in player_board.guesses:
+            return True
+        else:
+            player_board.guesses.append(target)
+            break
+
+    print(f"Computer chose {coordinates}")
+    if target in player_board.ship_positions:
+        player_board.ship_number -=1
+        print(f"Computer scores a hit! You have {player_board.ship_number} ships left")
+    else:
+        print(f"Computer misses. You have {player_board.ship_number} ships left")
 
 
 def play_game():
@@ -182,6 +197,7 @@ def play_game():
     game_board(computer_board)
 
     player_guess(player_board, computer_board)
+    computer_guess(player_board)
 
 
 print("\nWelcome to Battleships!\n")
