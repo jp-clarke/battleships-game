@@ -27,7 +27,11 @@ def game_setup():
     """
     Player enters name, sets board size. Ship number based on board size.
     """
-    player_name = input("Enter your name:\n")
+    while True:
+        player_name = input("Enter your name:\n")
+
+        if validate_name(player_name):
+            break
 
     while True:
         board_size = input("Enter board size (4-6)\n")
@@ -40,6 +44,20 @@ def game_setup():
     print(f"You have {ship_number} ships.\n")
 
     return player_name, board_size, ship_number
+
+
+def validate_name(value):
+    """
+    Validates player name input.
+    """
+    try:
+        if 0 < len(value) <= 50:
+            return True
+        print("Name must be from 1 to 50 characters")
+        return False
+    except TypeError:
+        print("Name must be from 1 to 50 characters")
+        return False
 
 
 def validate_size(value):
