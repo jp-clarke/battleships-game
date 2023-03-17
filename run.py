@@ -1,9 +1,10 @@
 from random import randint
 
+# https://www.freecodecamp.org/news/the-python-sleep-function-how-to-make-python-wait-a-few-seconds-before-continuing-with-example-commands/
+from time import sleep
+
+# https://beautifultable.readthedocs.io/en/v0.7.0/
 from beautifultable import BeautifulTable
-"""
-https://beautifultable.readthedocs.io/en/v0.7.0/
-"""
 
 
 class Board:
@@ -119,14 +120,18 @@ def game_loop(player_board, computer_board):
     Loops through player and computer guesses until all ships
     have been destroyed on either board.
     """
+    sleep(1)
     print(f"\nYou have {player_board.ship_number} ships left")
     print(f"Computer has {computer_board.ship_number} ships left")
 
     while player_board.ship_number != 0 and computer_board.ship_number != 0:
         player_guess(computer_board)
+        sleep(1.5)
         computer_guess(player_board)
 
+        sleep(1.5)
         update_board(player_board)
+        sleep(1.5)
         update_board(computer_board)
 
 
@@ -134,7 +139,7 @@ def player_guess(board):
     """
     Receives a target from player and returns a hit or miss on computer board.
     """
-    print(board.ship_positions)
+    # print(board.ship_positions)
 
     while True:
         target = input("\nChoose a target. eg. 'A1'\n")
@@ -231,31 +236,43 @@ def end_game(player_board, computer_board):
     """
     Finishes game and declares winner.
     """
+    sleep(1)
     if player_board.ship_number == 0 and computer_board.ship_number == 0:
         print(f"\n{player_board.player_name} has no ships left")
-        print("Computer has no ships left")
+        sleep(1)
+        print("Computer has no ships left\n")
+        sleep(1)
         print("Game drawn")
     elif player_board.ship_number == 1 and computer_board.ship_number == 0:
         print(f"\n{player_board.player_name} has 1 ship left")
-        print("Computer has no ships left")
-        print(f"\n{player_board.player_name} wins the game")
+        sleep(1)
+        print("Computer has no ships left\n")
+        sleep(1)
+        print(f"{player_board.player_name} wins the game!")
     elif player_board.ship_number > 1 and computer_board.ship_number == 0:
         print(
             f"\n{player_board.player_name} has "
             f"{player_board.ship_number} ships left"
         )
-        print("Computer has no ships left")
-        print(f"{player_board.player_name} wins the game")
+        sleep(1)
+        print("Computer has no ships left\n")
+        sleep(1)
+        print(f"{player_board.player_name} wins the game!")
     elif player_board.ship_number == 0 and computer_board.ship_number == 1:
-        print(f"\n{player_board.player_name} has no ships left")
-        print("Computer has 1 ship left")
-        print("Computer wins the game")
+        print(f"{player_board.player_name} has no ships left")
+        sleep(1)
+        print("Computer has 1 ship left\n")
+        sleep(1)
+        print("Computer wins the game!")
     elif player_board.ship_number == 0 and computer_board.ship_number > 1:
         print(f"\n{player_board.player_name} has no ships left")
+        sleep(1)
         print(f"Computer has {computer_board.ship_number} ships left")
-        print("Computer wins the game")
+        sleep(1)
+        print("\nComputer wins the game!")
 
-    input("\nPress Enter to continue...")
+    sleep(1)
+    input("\nPress Enter to continue...\n")
     play_game()
 
 
@@ -266,11 +283,13 @@ def play_game():
     """
     print("\nWelcome to Battleships!\n")
 
+    sleep(1)
     setup_data = game_setup()
     player_name = setup_data[0]
     board_size = setup_data[1]
     ship_number = setup_data[2]
 
+    sleep(1)
     player_board = Board(board_size, ship_number, player_name, "human")
     computer_board = Board(board_size, ship_number, "Computer", "computer")
 
@@ -278,6 +297,7 @@ def play_game():
     populate_board(computer_board)
 
     game_board(player_board)
+    sleep(1)
     game_board(computer_board)
 
     game_loop(player_board, computer_board)
