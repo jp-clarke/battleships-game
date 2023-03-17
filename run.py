@@ -1,8 +1,11 @@
+# Generate random numbers for placing ships and generating targets on board.
 from random import randint
 
+# Creates time delay between functions to improve user experience.
 # https://www.freecodecamp.org/news/the-python-sleep-function-how-to-make-python-wait-a-few-seconds-before-continuing-with-example-commands/
 from time import sleep
 
+# Prints visually appealing game board to terminal
 # https://beautifultable.readthedocs.io/en/v0.7.0/
 from beautifultable import BeautifulTable
 
