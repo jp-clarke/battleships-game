@@ -43,6 +43,10 @@ def game_setup():
 
     ship_number = round(1.3*int(board_size))
     print(f"You have {ship_number} ships.\n")
+    sleep(1)
+    print(f"\u0394 - {player_name}'s ships")
+    print("X - Hit")
+    print("O - Miss")
 
     return player_name, board_size, ship_number
 
@@ -289,13 +293,13 @@ def play_game():
     board_size = setup_data[1]
     ship_number = setup_data[2]
 
-    sleep(1)
     player_board = Board(board_size, ship_number, player_name, "human")
     computer_board = Board(board_size, ship_number, "Computer", "computer")
 
     populate_board(player_board)
     populate_board(computer_board)
 
+    sleep(1)
     game_board(player_board)
     sleep(1)
     game_board(computer_board)
