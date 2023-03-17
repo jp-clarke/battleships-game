@@ -49,11 +49,11 @@ def validate_size(value):
     try:
         if 3 < int(value) < 7:
             return True
-        else:
-            print("Please enter a number between 4 and 6")
-            return False
+        print("Please enter a number between 4 and 6")
+        return False
     except ValueError:
         print("Please enter a number between 4 and 6")
+        return False
 
 
 def populate_board(board):
@@ -111,8 +111,6 @@ def game_loop(player_board, computer_board):
         update_board(player_board)
         update_board(computer_board)
 
-    # print("game over")
-
 
 def player_guess(board):
     """
@@ -123,9 +121,9 @@ def player_guess(board):
     while True:
         target = input("\nChoose a target. eg. 'A1'\n")
         target = list(target)
-        target[0] = target[0].upper()
 
         if validate_target(board, target):
+            target[0] = target[0].upper()
             # https://stackoverflow.com/questions/4528982/convert-alphabet-letters-to-number-in-python
             target[0] = ord(target[0]) - 65
             target[1] = int(target[1]) - 1
@@ -148,6 +146,11 @@ def validate_target(board, value):
     Validates player's input coordinates to target computer board.
     """
     try:
+        if len(value) == 0:
+            print("Please enter a valid coordinate")
+            return False
+
+        value[0] = value[0].upper()
         if (len(value) == 2 and
             value[0] in board.rows_header and
                 value[1] in board.columns_header):
@@ -157,6 +160,7 @@ def validate_target(board, value):
             return False
     except ValueError:
         print("Please enter a valid coordinate")
+        return False
 
 
 def computer_guess(board):
@@ -169,21 +173,15 @@ def computer_guess(board):
         target = [row, column]
         coordinates = str(chr(target[0] + 65) + str(target[1] + 1))
 
-        # print(target)
-
         if target not in board.guesses:
             board.guesses.append(target)
             break
-        else:
-            continue
-
-    # print(board.guesses)
 
     print(f"Computer chose {coordinates}")
     if target in board.ship_positions:
         board.ship_number -= 1
         print(
-            f"Computer scores a hit!"
+            f"Computer scores a hit! "
             f"Player ships remaining: {board.ship_number}"
         )
     else:
@@ -216,30 +214,30 @@ def end_game(player_board, computer_board):
     Finishes game and declares winner.
     """
     if player_board.ship_number == 0 and computer_board.ship_number == 0:
-        print(f"{player_board.player_name} has no ships left")
+        print(f"\n{player_board.player_name} has no ships left")
         print("Computer has no ships left")
         print("Game drawn")
     elif player_board.ship_number == 1 and computer_board.ship_number == 0:
-        print(f"{player_board.player_name} has 1 ship left")
+        print(f"\n{player_board.player_name} has 1 ship left")
         print("Computer has no ships left")
-        print(f"{player_board.player_name} wins the game")
+        print(f"\n{player_board.player_name} wins the game")
     elif player_board.ship_number > 1 and computer_board.ship_number == 0:
         print(
-            f"{player_board.player_name} has"
+            f"\n{player_board.player_name} has "
             f"{player_board.ship_number} ships left"
         )
         print("Computer has no ships left")
         print(f"{player_board.player_name} wins the game")
     elif player_board.ship_number == 0 and computer_board.ship_number == 1:
-        print(f"{player_board.player_name} has no ships left")
+        print(f"\n{player_board.player_name} has no ships left")
         print("Computer has 1 ship left")
-        print()
+        print("Computer wins the game")
     elif player_board.ship_number == 0 and computer_board.ship_number > 1:
-        print(f"{player_board.player_name} has no ships left")
+        print(f"\n{player_board.player_name} has no ships left")
         print(f"Computer has {computer_board.ship_number} ships left")
         print("Computer wins the game")
 
-    input("Press Enter to continue...")
+    input("\nPress Enter to continue...")
     play_game()
 
 
