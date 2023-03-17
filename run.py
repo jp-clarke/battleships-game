@@ -30,7 +30,7 @@ def game_setup():
     player_name = input("Enter your name:\n")
 
     while True:
-        board_size = input("Enter board size (4-6)\n") 
+        board_size = input("Enter board size (4-6)\n")
 
         if validate_size(board_size):
             print(f"\nBoard size: {board_size}x{board_size}")
@@ -98,7 +98,8 @@ def game_board(board):
 
 def game_loop(player_board, computer_board):
     """
-    Loops through player and computer guesses until all ships destroyed on either board.
+    Loops through player and computer guesses until all ships
+    have been destroyed on either board.
     """
     print(f"\nYou have {player_board.ship_number} ships left")
     print(f"Computer has {computer_board.ship_number} ships left")
@@ -147,7 +148,9 @@ def validate_target(board, value):
     Validates player's input coordinates to target computer board.
     """
     try:
-        if len(value) == 2 and value[0] in board.rows_header and value[1] in board.columns_header:
+        if (len(value) == 2 and
+            value[0] in board.rows_header and
+                value[1] in board.columns_header):
             return True
         else:
             print("Please enter a valid coordinate")
@@ -179,14 +182,18 @@ def computer_guess(board):
     print(f"Computer chose {coordinates}")
     if target in board.ship_positions:
         board.ship_number -= 1
-        print(f"Computer scores a hit! Player ships remaining: {board.ship_number}")
+        print(
+            f"Computer scores a hit!"
+            f"Player ships remaining: {board.ship_number}"
+        )
     else:
         print(f"Computer misses. Player ships remaining: {board.ship_number}")
 
 
 def update_board(board):
     """
-    Updates player and computer boards between rounds by adding hits and misses.
+    Updates player and computer boards between
+    rounds by adding hits and misses.
     """
     grid = board.grid
     guesses = len(board.guesses)
@@ -217,7 +224,10 @@ def end_game(player_board, computer_board):
         print("Computer has no ships left")
         print(f"{player_board.player_name} wins the game")
     elif player_board.ship_number > 1 and computer_board.ship_number == 0:
-        print(f"{player_board.player_name} has {player_board.ship_number} ships left")
+        print(
+            f"{player_board.player_name} has"
+            f"{player_board.ship_number} ships left"
+        )
         print("Computer has no ships left")
         print(f"{player_board.player_name} wins the game")
     elif player_board.ship_number == 0 and computer_board.ship_number == 1:
