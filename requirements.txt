@@ -1,1 +1,1 @@
-# Your requirements go here
+beautifultable==1.1.0
