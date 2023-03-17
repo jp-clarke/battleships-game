@@ -34,7 +34,7 @@ def game_setup():
             break
 
     while True:
-        board_size = input("Enter board size (4-6)\n")
+        board_size = input("Enter board size (3-6)\n")
 
         if validate_size(board_size):
             print(f"\nBoard size: {board_size}x{board_size}")
@@ -65,12 +65,12 @@ def validate_size(value):
     Validates player input for board size.
     """
     try:
-        if 3 < int(value) < 7:
+        if 2 < int(value) < 7:
             return True
-        print("Please enter a number between 4 and 6")
+        print("Please enter a number between 3 and 6")
         return False
     except ValueError:
-        print("Please enter a number between 4 and 6")
+        print("Please enter a number between 3 and 6")
         return False
 
 
