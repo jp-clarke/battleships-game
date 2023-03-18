@@ -41,20 +41,31 @@ The BeautifulTable module was used to create the game board grids in the termina
 - Welcome message and name input
     - The player is given the message "Welcome to Battleships!" and asked to input a name.
 
+![Welcome message and name input](documentation/welcome.PNG)<br>
+
 - Name validation
     - The player must enter a name which is from 1-50 characters. It can't be an empty string. If the name input is not valid an error message is given and the player will again be asked to enter a name.
+
+![Name validation](documentation/name_validation.PNG)<br>
 
 - Board size input
     - The player can select size of game board (square grid from 3x3 up to 6x6)
     - The board size will determine the number of ships. This is done using a simple calculation: 1.3 multiplied by the board size, rounded to the nearest integer.
+    - At this point the player will also be given a key showing symbols for ships, hits and misses on the game board.
+
+![Board size input](documentation/board_size_input.PNG)<br>
 
 - Board size validation
     - To select board size, the player must enter a number from 3 to 6. If anything else is entered, an error message is given and the player will be asked to re-enter a board size.
+
+![Board size validation](documentation/board_size_validation.PNG)
 
 - Board generation
     - Once the board size and number of ships are confirmed, the ships will be randomly positioned on both player and computer's boards.
     - Both boards will be displayed in the terminal. The player's board will show positions of the ships. The ships on the computer board cannot be seen
     - The BeautifulTable module is used to display a visually appealing and easy to read game board to the terminal.
+
+![Board generation](documentation/board_generation.PNG)
 
 - Choose a target input
     - The player is asked to choose a target on the computer board in the letter/number coordinates format (eg. A1).
@@ -64,15 +75,21 @@ The BeautifulTable module was used to create the game board grids in the termina
     - If the player enters anything other than a coordinate which appears on the board, the error message "Please enter a valid coordinate" is shown.
     - If the players enters a coordinate which has already been selected, the error message "Coordinate has already been selected. Please try again" is shown.
 
+![Target input and validation](documentation/target_validation.PNG)
+
 - Board update
     - The player will be informed if the selected target was a hit or miss, and the number of ships remaining on the computer's board.
     - The computer will then generate a target on the player's board using random numbers. The player will be informed if the computer's target was a hit or miss, and the number of ships remaining on the player's board.
     - The updated game board is printed to the terminal, and the player is asked for their next target input.
 
+![Board update](documentation/board_update.PNG)
+
 - End game
     - The game ends when the player, computer, or both, lose all of their ships.
     - The player is shown how many ships remain for both player and computer, and the result of the game (Player Wins, Computer Wins, or Game Drawn).
     - The game can be restarted by pressing Enter.
+
+![Game ends as draw](documentation/game_drawn.PNG)
 
 ### Features to be implemented
 
