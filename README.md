@@ -20,7 +20,7 @@ The player is asked to choose a target on the board, after which the computer wi
 
 After each round, the number of ships remaining for both player and computer is updated.
 
-The winner is the first to sink all of the opponent's ships. If both players lose their final ships in a single round, the game will be declared a draw.
+The winner is the first to sink all of the opponent's ships. If both player and computer lose their final ships in a single round, the game will be declared a draw.
 
 ## Design
 
@@ -28,7 +28,44 @@ The winner is the first to sink all of the opponent's ships. If both players los
 
 ## Features
 
+### Existing Features
+- Welcome message and name input
+    - The player is given the message "Welcome to Battleships!" and asked to input a name.
 
+- Name validation
+    - The player must enter a name which is from 1-50 characters. It can't be an empty string. If the name input is not valid an error message is given and the player will again be asked to enter a name.
+
+- Board size input
+    - The player can select size of game board (square grid from 3x3 up to 6x6)
+    - The board size will determine the number of ships. This is done using a simple calculation: 1.3 multiplied by the board size, rounded to the nearest integer.
+
+- Board size validation
+    - To select board size, the player must enter a number from 3 to 6. If anything else is entered, an error message is given and the player will be asked to re-enter a board size.
+
+- Board generation
+    - Once the board size and number of ships are confirmed, the ships will be randomly positioned on both player and computer's boards.
+    - Both boards will be displayed in the terminal. The player's board will show positions of the ships. The ships on the computer board cannot be seen
+    - The BeautifulTable module is used to display a visually appealing and easy to read game board to the terminal.
+
+- Choose a target input
+    - The player is asked to choose a target on the computer board in the letter/number coordinates format (eg. A1).
+    - The letter is not case sensitive, so "a1" is the same as "A1".
+
+- Target validation
+    - If the player enters anything other than a coordinate which appears on the board, the error message "Please enter a valid coordinate" is shown.
+    - If the players enters a coordinate which has already been selected, the error message "Coordinate has already been selected. Please try again" is shown.
+
+- Board update
+    - The player will be informed if the selected target was a hit or miss, and the number of ships remaining on the computer's board.
+    - The computer will then generate a target on the player's board using random numbers. The player will be informed if the computer's target was a hit or miss, and the number of ships remaining on the player's board.
+    - The updated game board is printed to the terminal, and the player is asked for their next target input.
+
+- End game
+    - The game ends when the player, computer, or both, lose all of their ships.
+    - The player is shown how many ships remain for both player and computer, and the result of the game (Player Wins, Computer Wins, or Game Drawn).
+    - The game can be restarted by pressing Enter.
+
+### Features to be implemented
 
 ## Data Model
 
@@ -44,7 +81,6 @@ The class Board was used as the data model. Instances of the Board class are cre
     - BeautifulTable()
 
 ## Testing
-
 
 
 
