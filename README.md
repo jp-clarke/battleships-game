@@ -45,5 +45,23 @@ The winner is the first to sink all of the opponent's ships. If both players los
 ## Deployment
 
 
+- Ensure that \n is added to end of all input strings
+- Update requirements.txt to ensure Heroku installs beautiful table  (pip3 freeze > requirements.txt)
+- Save and push changes to github
+- Login to Heroku
+- Create new app
+- Name app (must be unique)
+- Choose region (Europe)
+- Create app
+- Go to Settings tab
+- Config Vars
+    - The key is PORT and the value is 8000
+- Add Buildpacks (ensure correct order)
+    - python
+    - nodejs
+- Go to Deploy tab
+- Select GitHub and connect
+- Search for GitHub repository, select and connect
+- Deploy branch
 
-## Credits
+##  Credits
