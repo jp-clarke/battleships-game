@@ -266,7 +266,7 @@ def end_game(player_board, computer_board):
         sleep(1)
         print(f"{player_board.player_name} wins the game!")
     elif player_board.ship_number == 0 and computer_board.ship_number == 1:
-        print(f"{player_board.player_name} has no ships left")
+        print(f"\n{player_board.player_name} has no ships left")
         sleep(1)
         print("Computer has 1 ship left\n")
         sleep(1)
