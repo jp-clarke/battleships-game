@@ -2,9 +2,10 @@
 
 Battleships is a Python based variation of the classic pencil and paper game (and later board game). This particular version runs in Code Institute's mock terminal on Heroku. Users will play against a computer opponent and try to guess the position of the computer's ships before their own ships are destroyed.
 
-Link to the live version is as follows:
-
+Link to the live version is as follows:<br>
 https://battleships-jclarke.herokuapp.com/
+
+![Am I Responsive screenshot](documentation/amiresponsive.PNG)
 
 ## How to Play
 
@@ -70,7 +71,6 @@ The winner is the first to sink all of the opponent's ships. If both player and 
 - Allow the player to choose the number of ships the game starts with.
 - Allow the player to manually position the ships on the board, instead of using a random number generator to do so.
 - Add varying ship sizes from single square up to carrier (5 squares), much like the original game, and allow a larger range of board sizes to accommodate this.
-
 
 ## Data Model
 
