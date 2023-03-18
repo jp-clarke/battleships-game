@@ -32,9 +32,19 @@ The winner is the first to sink all of the opponent's ships. If both players los
 
 ## Data Model
 
-
+The class Board was used as the data model. Instances of the Board class are created for both the player's and the computer's data. The data stored includes the following:
+- board size
+- number of ships remaining on the board
+- player name
+- type (human or computer)
+- opponent's guesses on the board
+- ship positions on the board
+- table data
+    - row and column headers
+    - BeautifulTable()
 
 ## Testing
+
 
 
 
