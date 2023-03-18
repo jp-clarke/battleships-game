@@ -25,10 +25,18 @@ The winner is the first to sink all of the opponent's ships. If both player and 
 
 ## Design
 
+### Flowchart
+In the initial stages, a flowchart was created to illustrate how the game would be developed. The flowchart was subsequently updated to show input validation where required.
 
+![Battleships flowchart](documentation/flowchart.PNG)
+
+### BeautifulTable
+The BeautifulTable module was used to create the game board grids in the terminal (see link in credits). According to the documentation, this module is for "easily printing tabular data in a visually appealing format to a terminal". BeautifulTable is an elegant solution for printing the game board to the terminal.
+
+![BeautifulTable player board](documentation/beautifultable1.PNG)
+![BeautifulTable computer board](documentation/beautifultable2.PNG)
 
 ## Features
-
 ### Existing Features
 - Welcome message and name input
     - The player is given the message "Welcome to Battleships!" and asked to input a name.
