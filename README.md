@@ -67,6 +67,11 @@ The winner is the first to sink all of the opponent's ships. If both player and 
 
 ### Features to be implemented
 
+- Allow the player to choose the number of ships the game starts with.
+- Allow the player to manually position the ships on the board, instead of using a random number generator to do so.
+- Add varying ship sizes from single square up to carrier (5 squares), much like the original game, and allow a larger range of board sizes to accommodate this.
+
+
 ## Data Model
 
 The class Board was used as the data model. Instances of the Board class are created for both the player's and the computer's data. The data stored includes the following:
