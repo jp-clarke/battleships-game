@@ -112,7 +112,22 @@ The class Board was used as the data model. Instances of the Board class are cre
 
 ## Testing
 
+The code in run.py was passed through the Code Institute PEP8 linter to confirm that there were no issues.
 
+![PEP8 linter screenshot](documentation/pep8.PNG)
+
+| Feature | Testing Performed | Outcome | Result |
+| --- | --- | --- | --- |
+| Name validation | Entered invalid name | Error message returned: "Name must be from 1-50 characters" | Pass |
+| Name validation | Entered valid name | Recorded name used for remainder of game | Pass |
+| Board size validation | Entered invalid data | Error message returned: "Please enter a number between 3 and 6" | Pass |
+| Board size validation | Entered valid data | Game board generated in accordance with user defined board size | Pass |
+| Target validation | Entered invalid data | Error message returned: "Please enter a valid coordinate" | Pass |
+| Target validation | Entered duplicate data | Error message returned: "Coordinate has already been selected. Please try again"  | Pass |
+| Target validation | Entered valid data | Hit or miss recorded, number of ships, list of guesses and game board all updated accordingly. | Pass |
+| End game* | Play game to completion | "Player win", "Computer win" and "Game drawn" outcomes completed for all board sizes | Pass |
+
+\* During testing, the computer's ship positions were printed to the console so that a hit or miss could be deliberately made. This allowed the tester to manufacture a win or loss, and observe the result.
 
 ### Bugs
 
