@@ -146,7 +146,6 @@ def player_guess(board):
     """
     Receives a target from player and returns a hit or miss on computer board.
     """
-    # print(board.ship_positions)
 
     while True:
         target = input("\nChoose a target. eg. 'A1'\n")

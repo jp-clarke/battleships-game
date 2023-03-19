@@ -131,7 +131,12 @@ The code in run.py was passed through the Code Institute PEP8 linter to confirm 
 
 ### Bugs
 
-
+| No | Bug | Solution |
+| --- | --- | --- |
+| 1 | Game would continue even when computer's ships remaining went to 0. | while/or loop on line 134 was changed to while/and loop. This means that both player's and computer's ships remaining should not equal 0 for the game to continue, and if one of those reached 0, the game would end. |
+| 2 | Entering an empty target input would give an IndexError: list index out of range. | The target input string is converted to a list, but the validate target function was calling index 0 of the list before checking if the list length was 0. Calling index 0 of the list after the if statement on line 178 solved the issue. |
+| 3 | Duplicate coordinates were being generated in the list of computer guesses. | The if statement on line 205 was changed to append the list if the coordinate wasn't already there (if/not in). |
+| 4 | The function to update the game board was producing the TypeError: list indices must be integers or slices, not list. | The for loop on line 227 was referencing the list of guesses, instead of the length of that list. When the statement was changed from "for i in board.guesses" to "for i in range(guesses)", where "guesses" is the length of the list, the issue was resolved. |
 
 ## Deployment
 
