@@ -59,6 +59,9 @@ def validate_name(value):
     Validates player name input.
     """
     try:
+        if value.isspace():
+            print("Name cannot consist of empty spaces")
+            return False
         if 0 < len(value) <= 50:
             return True
         print("Name must be from 1 to 50 characters")

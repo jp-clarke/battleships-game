@@ -119,6 +119,7 @@ The code in run.py was passed through the Code Institute PEP8 linter to confirm 
 | Feature | Testing Performed | Outcome | Result |
 | --- | --- | --- | --- |
 | Name validation | Entered invalid name | Error message returned: "Name must be from 1-50 characters" | Pass |
+| Name validation | Entered empty spaces | Error message returned: "Name cannot consist of empty spaces" | Pass |
 | Name validation | Entered valid name | Recorded name used for remainder of game | Pass |
 | Board size validation | Entered invalid data | Error message returned: "Please enter a number between 3 and 6" | Pass |
 | Board size validation | Entered valid data | Game board generated in accordance with user defined board size | Pass |
