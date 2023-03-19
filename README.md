@@ -140,24 +140,42 @@ The code in run.py was passed through the Code Institute PEP8 linter to confirm 
 
 ## Deployment
 
+This project was written in Gitpod and has been deployed to Heroku. The deployment process is as follows:
 
+In Gitpod:
 - Ensure that \n is added to end of all input strings
 - Update requirements.txt to ensure Heroku installs beautiful table  (pip3 freeze > requirements.txt)
 - Save and push changes to github
+
+Heroku:
 - Login to Heroku
-- Create new app
-- Name app (must be unique)
-- Choose region (Europe)
-- Create app
-- Go to Settings tab
-- Config Vars
+- From the dashboard, create a new app
+- Give the app a unique name and choose your region (United States or Europe)
+- Click create app
+- Go to the Settings tab
+- Add the following Config Var:
     - The key is PORT and the value is 8000
-- Add Buildpacks (ensure correct order)
-    - python
-    - nodejs
-- Go to Deploy tab
+- Add the following Buildpacks, in this order:
+    1. python
+    2. nodejs
+- Go to the Deploy tab
 - Select GitHub and connect
-- Search for GitHub repository, select and connect
-- Deploy branch
+- Search for the GitHub repository, select and connect
+- Select Enable Automatic Deploys, or Deploy Branch to deploy manually
 
 ##  Credits
+
+### Content
+
+- The BeautifulTable module was used to produce the game boards in this project:
+https://beautifultable.readthedocs.io/en/v0.7.0/
+- The sleep function was used to create a time delay between prints to make it easier for the player to follow:
+https://www.freecodecamp.org/news/the-python-sleep-function-how-to-make-python-wait-a-few-seconds-before-continuing-with-example-commands/
+- The following pages were referenced to convert from numbers to alphabet and vice versa. This was required to allow the player to see the grid in letter/number coordinates (eg. A1), as per the traditional battleship game, while keeping with the indexing methodology in python:
+https://stackoverflow.com/questions/18544419/how-to-convert-numbers-to-alphabet
+https://stackoverflow.com/questions/4528982/convert-alphabet-letters-to-number-in-python
+
+### Acknowledgements
+
+- I'd like to thank my mentor, Jubril Akolade for his continued guidance and support.
+- Thank you to the Code Institute Slack Community for the wealth of additional resources provided.
