@@ -127,6 +127,9 @@ The code in run.py was passed through the Code Institute PEP8 linter to confirm 
 | Target validation | Entered duplicate data | Error message returned: "Coordinate has already been selected. Please try again"  | Pass |
 | Target validation | Entered valid data | Hit or miss recorded, number of ships, list of guesses and game board all updated accordingly. | Pass |
 | End game* | Play game to completion | "Player win", "Computer win" and "Game drawn" outcomes completed for all board sizes | Pass |
+| Play again validation | Entered invalid data | Error message returned: "Please enter y for yes or n for no" | Pass |
+| Play again validation | Enter "y" or "Y" | Game restarts | Pass |
+| Play again validation | Enter "n" or "N" | Game ends, message returned: "Thanks for playing! Goodbye!" | Pass |
 
 \* During testing, the computer's ship positions were printed to the console so that a hit or miss could be deliberately made. This allowed the tester to manufacture a win or loss, and observe the result.
 

@@ -286,7 +286,7 @@ def end_game(player_board, computer_board):
 
         if validate_play(play_again):
             break
-    
+
     if play_again == "Y" or play_again.upper() == "Y":
         play_game()
     if play_again == "N" or play_again.upper() == "N":
