@@ -245,7 +245,7 @@ def end_game(player_board, computer_board):
     """
     Finishes game and declares winner.
     """
-    sleep(1)
+    sleep(1.5)
     if player_board.ship_number == 0 and computer_board.ship_number == 0:
         print(f"\n{player_board.player_name} has no ships left")
         sleep(1)
@@ -281,8 +281,31 @@ def end_game(player_board, computer_board):
         print("\nComputer wins the game!")
 
     sleep(1)
-    input("\nPress Enter to continue...\n")
-    play_game()
+    while True:
+        play_again = input("\nPlay again? (y/n)\n")
+
+        if validate_play(play_again):
+            break
+    
+    if play_again == "Y" or play_again.upper() == "Y":
+        play_game()
+    if play_again == "N" or play_again.upper() == "N":
+        print("Thanks for playing! Goodbye!")
+
+
+def validate_play(value):
+    """
+    Validates player input for replaying game.
+    """
+    try:
+        if value == "Y" or value.upper() == "Y":
+            return True
+        if value == "N" or value.upper() == "N":
+            return True
+        print("Please enter y for yes or n for no")
+    except ValueError:
+        print("Please enter y for yes or n for no")
+        return False
 
 
 def play_game():
